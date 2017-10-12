@@ -47,12 +47,12 @@ module.exports = {
                 type: Sequelize.DATE
             },
             carId: {
+                allowNull: false,
                 type: Sequelize.INTEGER,
                 onDelete: 'CASCADE',
                 references: {
                     model: 'Cars',
-                    key: 'id',
-                    as: 'carId',
+                    key: 'id'
                 },
             },
         });

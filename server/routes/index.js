@@ -6,7 +6,7 @@ module.exports = (app) => {
     app.get('/api', (req, res) => res.status(200).send({
         message: 'Welcome to the API!',
     }));
-    
+
     //for cars
     app.get('/api/cars', carsController.list);
     app.post('/api/cars', carsController.create);
@@ -22,7 +22,12 @@ module.exports = (app) => {
     app.delete('/api/passengers/:id', passengerController.destroy);
 
     //for drivers
-    app.post('/api/cars/:carId/drivers', driverController.create);
+    app.post('/api/drivers/', driverController.create);
+    app.get('/api/drivers', driverController.list);
+    app.post('/api/drivers', driverController.create);
+    app.get('/api/passdriversengers/:id', driverController.retrieve);
+    app.put('/api/drivers/:id', driverController.update);
+    app.delete('/api/drivers/:id', driverController.destroy);
 
     // For any other request method on todo items, we're going to return "Method Not Allowed"
     /*app.all('/api/car/:todoId/items', (req, res) =>

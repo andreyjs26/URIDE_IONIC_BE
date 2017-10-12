@@ -10,14 +10,18 @@ module.exports = (sequelize, DataTypes) => {
         exit: DataTypes.TIME,
         roundTrip: DataTypes.BOOLEAN,
         email: DataTypes.STRING,
-        password: DataTypes.STRING
+        password: DataTypes.STRING,
+        carId : DataTypes.INTEGER
     }, {
         classMethods: {
             associate: function(models) {
                 // associations can be defined here
-                Driver.belongsTo(models.Car, {
-                    foreignKey: 'carId',
-                    onDelete: 'CASCADE',
+                Driver.belongsTo(models.Car,{
+                    foreignKey: {
+                        field: 'carId',
+                        allowNull: false,
+                    },
+                    onDelete: 'CASCADE'
                 });
             }
         }
