@@ -1,11 +1,15 @@
 const carsController = require('../controllers').cars;
 const driverController = require('../controllers').drivers;
 const passengerController = require('../controllers').passengers;
+const loginController = require('../controllers').login;
 
 module.exports = (app) => {
     app.get('/api', (req, res) => res.status(200).send({
         message: 'Welcome to the API!',
     }));
+
+    //for login
+    app.post('/api/login',loginController.login);
 
     //for cars
     app.get('/api/cars', carsController.list);
@@ -25,7 +29,7 @@ module.exports = (app) => {
     app.post('/api/drivers/', driverController.create);
     app.get('/api/drivers', driverController.list);
     app.post('/api/drivers', driverController.create);
-    app.get('/api/passdriversengers/:id', driverController.retrieve);
+    app.get('/api/drivers/:id', driverController.retrieve);
     app.put('/api/drivers/:id', driverController.update);
     app.delete('/api/drivers/:id', driverController.destroy);
 

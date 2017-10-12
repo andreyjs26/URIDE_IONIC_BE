@@ -30,7 +30,7 @@ module.exports = {
     retrieve(req, res) {
         return Driver
             .findById(req.params.id, {
-                /*include: [{
+            /*    include: [{
                     model: TodoItem,
                     as: 'todoItems',
                 }],*/
