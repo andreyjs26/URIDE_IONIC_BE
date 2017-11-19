@@ -1,11 +1,14 @@
 const Driver = require('../models').Driver;
 const Passenger = require('../models').Passenger;
+const Car = require('../models').Car;
+
 
 module.exports = {
     login(req,res){
         if(req.body.type === 'driver'){
             return Driver
                 .findAll({
+                    include: [ {model: Car}],
                     where: {
                         email: req.body.email,
                         password: req.body.password

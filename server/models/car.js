@@ -8,12 +8,12 @@ module.exports = (sequelize, DataTypes) => {
         license: DataTypes.STRING,
         riteve: DataTypes.BOOLEAN,
         capacity: DataTypes.INTEGER
-    }, {
-        classMethods: {
-            associate: function(models) {
-                // associations can be defined here
-            }
-        }
     });
+
+    Car.associate = function(models) {
+        // associations can be defined here
+        Car.hasOne(models.Driver);
+    };
+
     return Car;
 };

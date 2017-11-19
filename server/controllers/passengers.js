@@ -27,12 +27,7 @@ module.exports = {
     },
     retrieve(req, res) {
         return Passenger
-            .findById(req.params.id, {
-                /*include: [{
-                    model: TodoItem,
-                    as: 'todoItems',
-                }],*/
-            })
+            .findById(req.params.id, {})
             .then(passenger => {
                 if (!passenger) {
                     return res.status(404).send({

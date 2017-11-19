@@ -46,15 +46,15 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.DATE
             },
-            carId: {
+            CarId: {
                 allowNull: false,
                 type: Sequelize.INTEGER,
                 onDelete: 'CASCADE',
                 references: {
                     model: 'Cars',
                     key: 'id'
-                },
-            },
+                }
+            }
         });
     },
     down: (queryInterface, Sequelize) => {

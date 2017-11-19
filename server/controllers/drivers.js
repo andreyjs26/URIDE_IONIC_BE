@@ -1,4 +1,5 @@
 const Driver = require('../models').Driver;
+const Car = require('../models').Car;
 
 module.exports = {
     create(req, res) {
@@ -14,7 +15,7 @@ module.exports = {
                 roundTrip: req.body.roundTrip,
                 email: req.body.email,
                 password: req.body.password,
-                carId: req.body.carId
+                CarId: req.body.CarId
 
             })
             .then(driver => res.status(201).send(driver))
@@ -23,18 +24,13 @@ module.exports = {
 
     list(req, res) {
         return Driver
-            .all()
-            .then(cars => res.status(200).send(cars))
+            .findAll({include: [ {model: Car}]})
+            .then(drivers => res.status(200).send(drivers))
             .catch(error => res.status(400).send(error));
     },
     retrieve(req, res) {
         return Driver
-            .findById(req.params.id, {
-            /*    include: [{
-                    model: TodoItem,
-                    as: 'todoItems',
-                }],*/
-            })
+            .findById(req.params.id,{include: [ {model: Car}]})
             .then(driver => {
                 if (!driver) {
                     return res.status(404).send({
