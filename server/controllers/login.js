@@ -4,6 +4,8 @@ const Car = require('../models').Car;
 
 let Encryption = require('./encryption');
 
+var jwt  = require('jsonwebtoken'); // used to create, sign, and verify tokens
+
 
 module.exports = {
     login(req,res){
@@ -19,17 +21,24 @@ module.exports = {
                 .then(driver => {
                     if (!driver) {
                         return res.status(404).send({
-                            message: 'Incorrect credentials',
+                            message: 'Incorrect email',
                         });
                     }
                     let currentPassword = driver[0].dataValues.password;
                     //compate the password from the login and the stored in the DB
                     Encryption.comparePassword(req.body.password,currentPassword,function(err,result){
-                        if (result == true)
+                        if (result == true){
+                            //for creating the token I'm using the currentPassword as payload, and a var as privateKey
+                            var privateKey = req.app.get('superSecret');
+                            var token = jwt.sign({password: currentPassword}, privateKey, {
+                                expiresIn: '1d' // expires in 24 hours
+                            });
+                            driver[0].dataValues.token = token;
                             return res.status(200).send(driver) ;
+                        }
                         else
                             return res.status(404).send({
-                                message: 'Incorrect credentials',
+                                message: 'Incorrect password',
                             });
                     });
 
