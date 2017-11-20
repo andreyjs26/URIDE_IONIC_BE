@@ -1,7 +1,7 @@
 # URIDE_IONIC_BE
 BackEnd in NodeJs using Express js , Sequalizer Js and Postgres Sql
 
-##Includes :
+## Includes:
 * Json Web Token authentication
 * Password encryption
 * CRUD Passengers
