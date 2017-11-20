@@ -3,8 +3,6 @@ BackEnd in NodeJs using Express js , Sequalizer Js and Postgres Sql
 
 ## Missing:
 
-* Return car information
-* Figure out encription
 * Implement tokens
 * Migrate to Heroku
 
@@ -14,3 +12,6 @@ BackEnd in NodeJs using Express js , Sequalizer Js and Postgres Sql
 ## Migrations:
 * sequelize db:migrate
 * sequelize db:migrate:undo:all
+
+# Other dependencies:
+* npm install bcrypt -save

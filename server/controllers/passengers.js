@@ -1,23 +1,32 @@
 const Passenger = require('../models').Passenger;
 
+let encryption = require('./encryption');
+
 module.exports = {
     create(req, res) {
-        return Passenger
-            .create({
-                name: req.body.name,
-                lname: req.body.lname,
-                phone: req.body.phone,
-                from: req.body.from,
-                to: req.body.to,
-                entrance: req.body.entrance,
-                exit: req.body.exit,
-                roundTrip: req.body.roundTrip,
-                discapacity: req.body.discapacity,
-                email: req.body.email,
-                password: req.body.password
-            })
-            .then(passenger => res.status(201).send(passenger))
-            .catch(error => res.status(400).send(error));
+
+        if(!req.body.password){
+            res.status(400).send('Password is a required field');
+        }
+        encryption.cryptPassword(req.body.password,function(err,cryptoPassword){
+            return Passenger
+                .create({
+                    name: req.body.name,
+                    lname: req.body.lname,
+                    phone: req.body.phone,
+                    from: req.body.from,
+                    to: req.body.to,
+                    entrance: req.body.entrance,
+                    exit: req.body.exit,
+                    roundTrip: req.body.roundTrip,
+                    discapacity: req.body.discapacity,
+                    email: req.body.email,
+                    password: cryptoPassword
+                })
+                .then(passenger => res.status(201).send(passenger))
+                .catch(error => res.status(400).send(error));
+
+        });
     },
     list(req, res) {
         return Passenger

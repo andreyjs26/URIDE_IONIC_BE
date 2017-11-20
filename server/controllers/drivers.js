@@ -1,27 +1,34 @@
 const Driver = require('../models').Driver;
 const Car = require('../models').Car;
 
+//include encrpyption controller
+let encryption = require('./encryption');
+
 module.exports = {
     create(req, res) {
-        return Driver
-            .create({
-                name: req.body.name,
-                lname: req.body.lname,
-                phone: req.body.phone,
-                from: req.body.from,
-                to: req.body.to,
-                entrance: req.body.entrance,
-                exit: req.body.exit,
-                roundTrip: req.body.roundTrip,
-                email: req.body.email,
-                password: req.body.password,
-                CarId: req.body.CarId
+        if(!req.body.password)
+            res.status(400).send('Password is a required field');
+        //send password to be encrypted and return the passwrod , save that one
+        encryption.cryptPassword(req.body.password,function(err,cryptoPassword){
+            return Driver
+                .create({
+                    name: req.body.name,
+                    lname: req.body.lname,
+                    phone: req.body.phone,
+                    from: req.body.from,
+                    to: req.body.to,
+                    entrance: req.body.entrance,
+                    exit: req.body.exit,
+                    roundTrip: req.body.roundTrip,
+                    email: req.body.email,
+                    password: cryptoPassword,
+                    CarId: req.body.CarId
 
-            })
-            .then(driver => res.status(201).send(driver))
-            .catch(error => res.status(400).send(error));
+                })
+                .then(driver => res.status(201).send(driver))
+                .catch(error => res.status(400).send(error));
+        });
     },
-
     list(req, res) {
         return Driver
             .findAll({include: [ {model: Car}]})
