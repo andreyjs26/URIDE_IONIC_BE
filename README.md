@@ -9,7 +9,7 @@ BackEnd in NodeJs using Express js , Sequalizer Js and Postgres Sql
 * CRUD Drivers
 
 ## Missing:
-* Migrate to Heroku
+* Nothing for now
 
 ## For Run:
 * npm run start:dev
@@ -23,7 +23,7 @@ BackEnd in NodeJs using Express js , Sequalizer Js and Postgres Sql
 * npm install jsonwebtoken --save
 * npm install --save sequelize-cli
 
-##  Heroku: uride2017
+##  Heroku: https://dashboard.heroku.com/apps/uride2017
 * heroku create
 * heroku local
 * git push heroku master
