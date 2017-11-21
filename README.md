@@ -21,3 +21,10 @@ BackEnd in NodeJs using Express js , Sequalizer Js and Postgres Sql
 ## Other dependencies:
 * npm install bcrypt -save
 * npm install jsonwebtoken --save
+
+##  Heroku:
+* heroku create
+* git push heroku master
+*  heroku ps:scale web=1
+*  heroku open
+* heroku logs --tail
