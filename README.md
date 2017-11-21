@@ -19,12 +19,16 @@ BackEnd in NodeJs using Express js , Sequalizer Js and Postgres Sql
 * sequelize db:migrate:undo:all
 
 ## Other dependencies:
-* npm install bcrypt -save
+* npm install bcrypt --save
 * npm install jsonwebtoken --save
+* npm install --save sequelize-cli
 
 ##  Heroku:
 * heroku create
+* heroku local
 * git push heroku master
-*  heroku ps:scale web=1
-*  heroku open
+* heroku ps:scale web=1
+* heroku open
 * heroku logs --tail
+* heroku run node
+* heroku addons:create heroku-postgresql:hobby-dev
