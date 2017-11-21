@@ -53,7 +53,7 @@ module.exports = {
                     .findAll({
                         where: {
                             email: req.body.email,
-                            password: req.body.password
+                            //password: req.body.password
                         }
                     })
                     .then(passenger => {
@@ -62,7 +62,23 @@ module.exports = {
                                 message: 'Incorrect credentials',
                             });
                         }
-                        return res.status(200).send(passenger);
+                        let currentPassword = passenger[0].dataValues.password;
+                        //compate the password from the login and the stored in the DB
+                        Encryption.comparePassword(req.body.password,currentPassword,function(err,result){
+                            if (result == true){
+                                //for creating the token I'm using the currentPassword as payload, and a var as privateKey
+                                var privateKey = req.app.get('superSecret');
+                                var token = jwt.sign({password: currentPassword}, privateKey, {
+                                    expiresIn: '1d' // expires in 24 hours
+                                });
+                                passenger[0].dataValues.token = token;
+                                return res.status(200).send(passenger) ;
+                            }
+                            else
+                                return res.status(404).send({
+                                    message: 'Incorrect password',
+                                });
+                        });
                     })
                     .catch(error => res.status(400).send(error));
 

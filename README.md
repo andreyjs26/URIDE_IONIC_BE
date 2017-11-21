@@ -23,7 +23,7 @@ BackEnd in NodeJs using Express js , Sequalizer Js and Postgres Sql
 * npm install jsonwebtoken --save
 * npm install --save sequelize-cli
 
-##  Heroku:
+##  Heroku: uride2017
 * heroku create
 * heroku local
 * git push heroku master
