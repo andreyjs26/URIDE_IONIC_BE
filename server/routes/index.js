@@ -16,7 +16,11 @@ module.exports = (app) => {
 
     //for login
     app.post('/api/login',loginController.login);
-    
+
+    app.post('/api/cars', carsController.create);
+    app.post('/api/drivers/', driverController.create);
+    app.post('/api/passengers', passengerController.create);
+
     app.use(function(req, res, next) {
         // check header or url parameters or post parameters for token
         var token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -47,20 +51,17 @@ module.exports = (app) => {
 
     //for cars
     app.get('/api/cars', carsController.list);
-    app.post('/api/cars', carsController.create);
     app.get('/api/cars/:id', carsController.retrieve);
     app.put('/api/cars/:id', carsController.update);
     app.delete('/api/cars/:id', carsController.destroy);
 
     //for passengers
     app.get('/api/passengers', passengerController.list);
-    app.post('/api/passengers', passengerController.create);
     app.get('/api/passengers/:id', passengerController.retrieve);
     app.put('/api/passengers/:id', passengerController.update);
     app.delete('/api/passengers/:id', passengerController.destroy);
 
     //for drivers
-    app.post('/api/drivers/', driverController.create);
     app.get('/api/drivers', driverController.list);
     app.post('/api/drivers', driverController.create);
     app.get('/api/drivers/:id', driverController.retrieve);

@@ -27,6 +27,7 @@ BackEnd in NodeJs using Express js , Sequalizer Js and Postgres Sql
 * heroku create
 * heroku local
 * git push heroku master
+* heroku run bash
 * heroku ps:scale web=1
 * heroku open
 * heroku logs --tail
